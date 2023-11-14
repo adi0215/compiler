@@ -1,7 +1,7 @@
 
 # SLR(1)
 print("Tokenizer output: \n")
-import lexer
+import lex
 import copy
 
 # perform grammar augmentation
@@ -418,11 +418,7 @@ def createParseTable(statesDict, stateMap, T, NT):
 	print("\nSLR(1) parsing table:\n")
 	frmt = "{:>8}" * len(cols)
 	print("", frmt.format(*cols), "\n")
-	# for l in range(len(cols)):
-	# 	if l==0:
-	# 		print("  ",cols[l]," ",end='')
-	# 	else:
-	# 		print(cols[l]," ",end='')
+	
 
 	ptr = 0
 	j = 0

@@ -6,12 +6,15 @@ token_patterns = [
     (r'If', 'IF'),
     (r'if', 'IF'),
     (r'else', 'ELSE'),
-    (r'END IF', 'END_IF'),
-    (r'elseif', 'ELSE_IF'),
+    (r'Elseif', 'ELSE_IF'),
+    (r'end if', 'END_IF'),
+    (r'end foo', 'END_FOO'),
     (r'printf', 'PRINTF'),
+    (r'end', 'END'),
     (r':=', 'ASSIGNMENT'),
     (r'=', 'EQUALS'),
     (r'and', 'AND'),
+    (r'end', 'END'),
     (r'AND', 'AND'),
     (r'then', 'THEN'),
     (r'integer', 'INTEGER'),
@@ -47,8 +50,8 @@ Procedure foo( b : integer )
 b := 13; 
 If x = 12 and b = 13 then 
     printf( "by copy-in copy-out" ); 
-elseif x = 13 and b = 13 then 
-    printf( “by address” );
+Elseif x = 13 and b = 13 then 
+    printf( "by address" );
 else 
     printf( "A mystery" );
 end if; 
