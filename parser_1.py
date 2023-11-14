@@ -443,15 +443,15 @@ def printAllGOTO(diction):
 # rules section - *START*
 
 # example sample set 01
-rules = ["Program -> Procedure",
-"Procedure -> PROCEDURE IDENTIFIER LPAREN Parameter RPAREN Stmt",
-"Parameter -> IDENTIFIER COLON Type",
-"Type -> IDENTIFIER",
-"Stmt -> IDENTIFIER ASSIGNMENT LITERAL_INTEGER SEMICOLON| IF Expr THEN Stmt ELSE Stmt END_IF SEMICOLON",
-"Expr -> IDENTIFIER EQUALS LITERAL_INTEGER AND IDENTIFIER EQUALS LITERAL_INTEGER"
+rules = ["Pgm -> Proc",
+"Proc -> PROC ID LPAR Param RPAR Stmt",
+"Param -> ID COLON Type",
+"Type -> ID",
+"Stmt -> ID ASGN LIT_INT SC| IF Expr THEN Stmt ELSE Stmt END_IF SC",
+"Expr -> ID EQ LIT_INT AND ID EQ LIT_INT"
 		]
-nonterm_userdef = ['Program', 'Procedure', 'Parameter', 'Type', 'Stmt', 'Expr']
-term_userdef = ['PROCEDURE', 'IDENTIFIER', 'LPAREN', 'RPAREN', 'COLON', 'IF', 'THEN', 'ELSE', 'END_IF', 'ASSIGNMENT', 'EQUALS', 'AND', 'SEMICOLON', 'LITERAL_INTEGER']
+nonterm_userdef = ['Pgm', 'Proc', 'Param', 'Type', 'Stmt', 'Expr']
+term_userdef = ['PROC', 'ID', 'LPAR', 'RPAR', 'COLON', 'IF', 'THEN', 'ELSE', 'END_IF', 'ASGN', 'EQ', 'AND', 'SC', 'LIT_INT']
 start_symbol = nonterm_userdef[0]
 
 # example sample set 02
@@ -461,8 +461,7 @@ start_symbol = nonterm_userdef[0]
 #		 ]
 # nonterm_userdef = ['S','X','Y']
 # term_userdef = ['a','b','c','d','e']
-# start_symbol = nonterm_userdef[0]
-
+# start_symbol = nonterm_userdef[0
 # rules section - *END*
 print("\nOriginal grammar input:\n")
 for y in rules:
