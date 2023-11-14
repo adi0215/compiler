@@ -1,8 +1,19 @@
-Program -> Procedure
-Procedure -> PROCEDURE IDENTIFIER LPAREN Parameter RPAREN Stmt
-Parameter -> IDENTIFIER COLON Type
-Type -> IDENTIFIER
-Stmt -> IDENTIFIER ASSIGNMENT LITERAL_INTEGER SEMICOLON
-      | IF Expr THEN Stmt ELSE Stmt END_IF SEMICOLON
-Expr -> IDENTIFIER EQUALS LITERAL_INTEGER AND IDENTIFIER EQUALS LITERAL_INTEGER
-    
+program-> declaration procedure
+
+declaration -> INTEGER IDENTIFIER SEMICOLON
+
+procedure -> PROCEDURE IDENTIFIER LPAREN parameter RPAREN statement END IDENTIFIER
+
+IDENTIFIER -> IDENTIFIER ASSIGNMENT INTEGER_LITERAL
+
+statement -> assignment | if_statement | PRINTF LPAREN STRING_LITERAL RPAREN SEMICOLON
+
+assignment -> IDENTIFIER ASSIGNMENT expression SEMICOLON
+
+if_statement -> IF condition THEN statement elseif_statement ELSE statement END IF SEMICOLON
+
+elseif_statement -> ELSEIF condition THEN statement elseif_statement | ε
+
+condition -> expression AND expression
+
+expression -> IDENTIFIER | INTEGER_LITERAL | LPAREN expression RPAREN | expression EQUALS expression

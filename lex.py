@@ -2,23 +2,26 @@ import re
 
 # Define regular expressions for tokens
 token_patterns = [
-    (r'PROCEDURE', 'PROCEDURE'),
-    (r'IF', 'IF'),
-    (r'ELSE', 'ELSE'),
-    (r'END IF', 'END IF'),
+    (r'Procedure', 'PROCEDURE'),
+    (r'If', 'IF'),
+    (r'if', 'IF'),
+    (r'else', 'ELSE'),
+    (r'END IF', 'END_IF'),
+    (r'elseif', 'ELSE_IF'),
     (r'printf', 'PRINTF'),
-    (r'[a-zA-Z][a-zA-Z0-9]*', 'IDENTIFIER'),
     (r':=', 'ASSIGNMENT'),
     (r'=', 'EQUALS'),
+    (r'and', 'AND'),
     (r'AND', 'AND'),
+    (r'then', 'THEN'),
     (r'integer', 'INTEGER'),
+    (r'[a-zA-Z][a-zA-Z0-9]*', 'IDENTIFIER'),
     (r'[0-9]+', 'INTEGER_LITERAL'),
     (r';', 'SEMICOLON'),
+    (r':', 'COLON'),
     (r'\(', 'LPAREN'),
     (r'\)', 'RPAREN'),
-    (r'\{', 'LBRACE'),
-    (r'\}', 'RBRACE'),
-    (r'"[^"]*"', 'STRING_LITERAL'),
+   (r'".*?"', 'STRING_LITERAL'),
     (r'\s+', None),  
 ]
 
@@ -40,17 +43,16 @@ def tokenize(source_code):
 # Example usage
 source_code = """
 X: integer ;
-Procedure foo( b : integer )
-b := 13;
-If x = 12 and b = 13 then
-    printf( “by copy-in copy-out” );
-elseif x = 13 and b = 13 then
+Procedure foo( b : integer ) 
+b := 13; 
+If x = 12 and b = 13 then 
+    printf( "by copy-in copy-out" ); 
+elseif x = 13 and b = 13 then 
     printf( “by address” );
-else
-    printf( “A mystery” );
-end if;
+else 
+    printf( "A mystery" );
+end if; 
 end foo
-
 """
 
 tokens = tokenize(source_code)

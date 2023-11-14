@@ -384,6 +384,7 @@ def createParseTable(statesDict, stateMap, T, NT):
 		rhs = k[1]
 		multirhs = rhs.split('|')
 		
+		
 		# remove un-necessary spaces
 		for i in range(len(multirhs)):
 			multirhs[i] = multirhs[i].strip()
@@ -416,53 +417,62 @@ def createParseTable(statesDict, stateMap, T, NT):
 	# printing table
 	print("\nSLR(1) parsing table:\n")
 	frmt = "{:>8}" * len(cols)
-	print(" ", frmt.format(*cols), "\n")
+	print("", frmt.format(*cols), "\n")
+	# for l in range(len(cols)):
+	# 	if l==0:
+	# 		print("  ",cols[l]," ",end='')
+	# 	else:
+	# 		print(cols[l]," ",end='')
+
 	ptr = 0
 	j = 0
 	for y in Table:
 		frmt1 = "{:>8}" * len(y)
-		print(f"{{:>3}} {frmt1.format(*y)}"
-			.format('I'+str(j)))
+		print(f"{{:>3}} {frmt1.format(*y)}".format('I'+str(j)))
 		j += 1
+		
 
 def printResult(rules):
 	for rule in rules:
-		print(f"{rule[0]} ->"
-			f" {' '.join(rule[1])}")
+		print(f"{rule[0]} ->"f" {' '.join(rule[1])}")
 
 def printAllGOTO(diction):
 	for itr in diction:
-		print(f"GOTO ( I{itr[0]} ,"
-			f" {itr[1]} ) = I{stateMap[itr]}")
+		print(f"GOTO ( I{itr[0]} ,"f" {itr[1]} ) = I{stateMap[itr]}")
 
-# *** MAIN *** - Driver Code
 
-# uncomment any rules set to test code
-# follow given format to add -
-# user defined grammar rule set
-# rules section - *START*
 
-# example sample set 01
-rules = ["Pgm -> Proc",
-"Proc -> PROC ID LPAR Param RPAR Stmt",
-"Param -> ID COLON Type",
-"Type -> ID",
-"Stmt -> ID ASGN LIT_INT SC| IF Expr THEN Stmt ELSE Stmt END_IF SC",
-"Expr -> ID EQ LIT_INT AND ID EQ LIT_INT"
-		]
-nonterm_userdef = ['Pgm', 'Proc', 'Param', 'Type', 'Stmt', 'Expr']
-term_userdef = ['PROC', 'ID', 'LPAR', 'RPAR', 'COLON', 'IF', 'THEN', 'ELSE', 'END_IF', 'ASGN', 'EQ', 'AND', 'SC', 'LIT_INT']
+
+rules=[
+
+"prgm-> dec proc",
+
+"dec -> INT ID SC",
+
+"proc -> PROC ID LPAR param RPAR stmt END ID",
+
+"ID -> ID ASSGN INT_LIT",
+
+"stmt -> assgn | if_stmt | PNTF LPAR STR_LIT RPAR SC",
+
+"assgn -> ID ASSGN expr SC",
+
+"if_stmt -> IF cond THEN stmt elif_stmt ELSE stmt END IF SC",
+
+"elif_stmt -> ELSEIF cond THEN stmt elif_stmt | ε",
+
+"cond -> expr AND expr",
+
+"expr -> ID | INT_LIT | LPAR expr RPAR | expr EQ expr",
+
+                                    ]
+nonterm_userdef = ['prgm', 'proc', 'param', 'stmt', 'expr','dec','assgn','if_stmt','elif_stmt','cond']
+term_userdef = ['PROC', 'ID', 'LPAR', 'RPAR', 'COLON', 'IF', 'THEN', 'ELSE', 'END_IF', 'ASSGN', 'EQ', 'AND', 'SC', 'INT_LIT','','PNTF','INT','COLON','END','ELSEIF','ε','STR_LIT']
 start_symbol = nonterm_userdef[0]
 
-# example sample set 02
-# rules = ["S -> a X d | b Y d | a Y e | b X e",
-#		 "X -> c",
-#		 "Y -> c"
-#		 ]
-# nonterm_userdef = ['S','X','Y']
-# term_userdef = ['a','b','c','d','e']
-# start_symbol = nonterm_userdef[0
-# rules section - *END*
+
+
+
 print("\nOriginal grammar input:\n")
 for y in rules:
 	print(y)
@@ -470,9 +480,7 @@ for y in rules:
 # print processed rules
 print("\nGrammar after Augmentation: \n")
 separatedRulesList = \
-	grammarAugmentation(rules,
-						nonterm_userdef,
-						start_symbol)
+	grammarAugmentation(rules,nonterm_userdef,start_symbol)
 printResult(separatedRulesList)
 
 # find closure
@@ -509,6 +517,4 @@ printAllGOTO(stateMap)
 diction = {}
 
 # call createParseTable function
-createParseTable(statesDict, stateMap,
-				term_userdef,
-				nonterm_userdef)
+createParseTable(statesDict, stateMap,term_userdef,nonterm_userdef)

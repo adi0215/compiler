@@ -18,7 +18,7 @@ token_patterns = [
     (r'\{', 'LBRACE'),
     (r'\}', 'RBRACE'),
     (r'".*?"', 'STRING_LITERAL'),
-    (r'\s+', None),  # Skip whitespace
+    (r'\s+', None), 
 ]
 
 # Combine regular expressions into a single pattern
@@ -38,10 +38,13 @@ def tokenize(source_code):
 
 # Example usage
 source_code = """
+X: integer ;
 PROCEDURE foo( b : INTEGER )
 b := 13;
 IF X = 12 AND b = 13 THEN
     printf( "by copy-in copy-out" );
+ELSEIF x = 13 and b = 13 then 
+    printf( “by address” ); 
 ELSE
     printf( "A mystery" );
 END IF;
