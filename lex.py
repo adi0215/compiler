@@ -11,14 +11,15 @@ token_patterns = [
     (r':=', 'ASSIGNMENT'),
     (r'=', 'EQUALS'),
     (r'AND', 'AND'),
+    (r'integer', 'INTEGER'),
     (r'[0-9]+', 'INTEGER_LITERAL'),
     (r';', 'SEMICOLON'),
     (r'\(', 'LPAREN'),
     (r'\)', 'RPAREN'),
     (r'\{', 'LBRACE'),
     (r'\}', 'RBRACE'),
-    (r'".*?"', 'STRING_LITERAL'),
-    (r'\s+', None),  # Skip whitespace
+    (r'"[^"]*"', 'STRING_LITERAL'),
+    (r'\s+', None),  
 ]
 
 # Combine regular expressions into a single pattern
@@ -38,13 +39,18 @@ def tokenize(source_code):
 
 # Example usage
 source_code = """
-PROCEDURE foo( b : INTEGER )
+X: integer ;
+Procedure foo( b : integer )
 b := 13;
-IF X = 12 AND b = 13 THEN
-    printf( "by copy-in copy-out" );
-ELSE
-    printf( "A mystery" );
-END IF;
+If x = 12 and b = 13 then
+    printf( “by copy-in copy-out” );
+elseif x = 13 and b = 13 then
+    printf( “by address” );
+else
+    printf( “A mystery” );
+end if;
+end foo
+
 """
 
 tokens = tokenize(source_code)
